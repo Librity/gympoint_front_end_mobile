@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import createRouter from './routes';
 
 export default function App() {
-  const signedIn = useSelector(state => state.auth.signedIn);
+  const signedIn = useSelector(state => state.student.signedIn);
 
   const Routes = createRouter(signedIn);
 

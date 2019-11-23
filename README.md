@@ -39,7 +39,7 @@ A versão mobile do projeto Gympoint representa a visão do aluno, ou seja, toda
 
 ### Opcionais
 
-1. Adicione scroll infinito com paginação na listagem de check-ins e pedidos de auxílio;
+- [ ] Adicione scroll infinito com paginação na listagem de check-ins e pedidos de auxílio;
 
 ## 🎨 Layout
 

@@ -10,6 +10,14 @@ export const Container = styled.SafeAreaView`
   align-items: center;
 `;
 
+export const Title = styled.Text`
+  font-size: 20px;
+  color: #fff;
+  font-weight: bold;
+  align-self: center;
+  margin-top: 30px;
+`;
+
 export const Avatar = styled.Image`
   width: 120px;
   height: 120px;
