@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { withNavigationFocus } from 'react-navigation';
-import { Alert } from 'react-native';
 
 import api from '~/services/api';
 
@@ -17,7 +16,9 @@ function ListHelpOrders({ navigation, isFocused }) {
   const [helpOrders, setHelpOrders] = useState([]);
 
   const loadHelpOrders = useCallback(async () => {
-    const response = await api.get(`/students/${studentId}/help_orders`);
+    const response = await api.get(`/students/${studentId}/help_orders`, {
+      params: { unanswered: false },
+    });
 
     setHelpOrders(response.data);
   }, [studentId]);
