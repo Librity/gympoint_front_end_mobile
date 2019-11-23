@@ -22,7 +22,29 @@ export default (signedIn = false) =>
         }),
         App: createBottomTabNavigator(
           {
-            Checkins,
+            CheckinNavigator: {
+              screen: createStackNavigator(
+                {
+                  Checkins,
+                },
+                {
+                  headerLayoutPreset: 'center',
+                  defaultNavigationOptions: {
+                    headerTransparent: true,
+                    headerTintColor: '#fff',
+                    headerLeftContainerStyle: {
+                      marginLeft: 20,
+                    },
+                  },
+                }
+              ),
+              navigationOptions: {
+                tabBarLabel: 'Check-ins',
+                tabBarIcon: ({ tintColor }) => (
+                  <Icon name="edit-location" size={20} color={tintColor} />
+                ),
+              },
+            },
             HelpOrders: {
               screen: createStackNavigator(
                 {
@@ -42,14 +64,9 @@ export default (signedIn = false) =>
                 }
               ),
               navigationOptions: {
-                tabBarVisible: false,
                 tabBarLabel: 'Pedir ajuda',
-                tabBarIcon: (
-                  <Icon
-                    name="live-help"
-                    size={20}
-                    color="rgba(255,255,255,0.6)"
-                  />
+                tabBarIcon: ({ tintColor }) => (
+                  <Icon name="live-help" size={20} color={tintColor} />
                 ),
               },
             },

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '~/services/api';
 
+import HeaderTitle from '~/components/HeaderTitle';
 import Background from '~/components/Background';
 import {
   Container,
@@ -25,14 +26,14 @@ export default function ViewHelpOrder({ navigation }) {
 }
 
 ViewHelpOrder.navigationOptions = ({ navigation }) => ({
-  title: 'Selecione o prestador',
+  headerTitle: () => <HeaderTitle />,
   headerLeft: () => (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate('Dashboard');
+        navigation.goBack();
       }}
     >
-      <Icon name="chevron-left" size={20} color="#fff" />
+      <Icon name="chevron-left" size={30} color="#fff" />
     </TouchableOpacity>
   ),
 });
