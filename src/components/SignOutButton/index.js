@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import { signOut } from '~/store/modules/student/actions';
 
@@ -15,7 +15,7 @@ export default function SignOutButton() {
 
   return (
     <TouchableOpacity onPress={handleSignOut}>
-      <Icon name="chevron-left" size={30} color="#fff" />
+      <Icon name="logout" size={30} color="#fff" />
     </TouchableOpacity>
   );
 }
