@@ -1,19 +1,64 @@
-import React, { useState, useEffect } from 'react';
-import { TouchableOpacity, Image } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import React, { useState } from 'react';
+import { Alert } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import api from '~/services/api';
 
 import HeaderTitle from '~/components/HeaderTitle';
 import Background from '~/components/Background';
+import GoBackButton from '~/components/GoBackButton';
 
-import { Container, HourList, Hour, Title } from './styles';
+import {
+  Container,
+  InputContainer,
+  NewHelpOrderButton,
+  NewOrderInput,
+} from './styles';
 
 export default function NewHelpOrder({ navigation }) {
+  const studentId = useSelector(state => state.student.studentId);
+
+  const [question, setQuestion] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleNewCheckin = async () => {
+    try {
+      setLoading(true);
+      await api.post(`/students/${studentId}/help_orders`, {
+        question,
+      });
+
+      setQuestion('');
+      navigation.goBack();
+      Alert.alert(
+        'Pedido de auxílio enviado!',
+        'A nossa equipe atenderá o teu pedido o antes possível.'
+      );
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+      Alert.alert('Falha no envio!', 'Verifique seus dados.');
+    }
+  };
+
   return (
     <Background>
       <Container>
-        <Title>NewHelpOrder</Title>
+        <InputContainer>
+          <NewOrderInput
+            placeholder="Inclua seu pedido de auxílio"
+            autoCorrect
+            multiline
+            returnKeyType="send"
+            onSubmitEditing={handleNewCheckin}
+            value={question}
+            onChangeText={setQuestion}
+          />
+        </InputContainer>
+
+        <NewHelpOrderButton onPress={handleNewCheckin} loading={loading}>
+          Enviar pedido
+        </NewHelpOrderButton>
       </Container>
     </Background>
   );
@@ -21,13 +66,5 @@ export default function NewHelpOrder({ navigation }) {
 
 NewHelpOrder.navigationOptions = ({ navigation }) => ({
   headerTitle: () => <HeaderTitle />,
-  headerLeft: () => (
-    <TouchableOpacity
-      onPress={() => {
-        navigation.goBack();
-      }}
-    >
-      <Icon name="chevron-left" size={30} color="#fff" />
-    </TouchableOpacity>
-  ),
+  headerLeft: () => <GoBackButton navigation={navigation} />,
 });

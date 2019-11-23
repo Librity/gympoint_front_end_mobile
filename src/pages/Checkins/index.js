@@ -7,14 +7,16 @@ import api from '~/services/api';
 
 import HeaderTitle from '~/components/HeaderTitle';
 import Background from '~/components/Background';
-import { Container, NewCheckinButton, List } from './styles';
 import Checkin from '~/components/Checkin';
 import SignOutButton from '~/components/SignOutButton';
+
+import { Container, NewCheckinButton, List } from './styles';
 
 function Checkins({ isFocused }) {
   const studentId = useSelector(state => state.student.studentId);
 
   const [checkins, setCheckins] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const loadCheckins = useCallback(async () => {
     const response = await api.get(`/students/${studentId}/checkins`);
@@ -30,10 +32,13 @@ function Checkins({ isFocused }) {
 
   const handleNewCheckin = async () => {
     try {
+      setLoading(true);
       await api.post(`/students/${studentId}/checkins`);
 
       loadCheckins();
+      setLoading(false);
     } catch (err) {
+      setLoading(false);
       Alert.alert(
         'Limite de check-ins excedido!',
         'Alunos só podem fazer 5 check-ins a cada 7 dias.'
@@ -44,7 +49,7 @@ function Checkins({ isFocused }) {
   return (
     <Background>
       <Container>
-        <NewCheckinButton onPress={handleNewCheckin}>
+        <NewCheckinButton onPress={handleNewCheckin} loading={loading}>
           Novo check-in
         </NewCheckinButton>
 

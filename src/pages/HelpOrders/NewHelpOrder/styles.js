@@ -1,30 +1,41 @@
 import styled from 'styled-components/native';
-import { RectButton } from 'react-native-gesture-handler';
+
+import Button from '~/components/Button';
 
 export const Container = styled.SafeAreaView`
+  margin: 20px;
+  margin-top: 60px;
+
+  display: flex;
   flex: 1;
-`;
-
-export const HourList = styled.FlatList.attrs({
-  showsVerticalScrollIndicator: false,
-  numColumns: 2,
-})`
-  padding: 0 20px;
-`;
-
-export const Hour = styled(RectButton)`
-  background: #fff;
-  border-radius: 4px;
-  padding: 20px;
-  flex: 1;
-  opacity: ${props => (props.enabled ? 1 : 0.6)};
-
+  flex-direction: column;
   align-items: center;
-  margin: 0 10px 20px;
+  align-self: stretch;
 `;
 
-export const Title = styled.Text`
-  font-size: 14px;
-  font-weight: bold;
+export const InputContainer = styled.View`
+  padding: 5px 15px;
+  border-radius: 4px;
+  background: #fff;
+
+  display: flex;
+  flex: 0.7;
+  align-self: stretch;
+  align-items: flex-start;
+  justify-content: flex-start;
+`;
+
+export const NewOrderInput = styled.TextInput.attrs({
+  placeholderTextColor: '#999',
+})`
+  line-height: 26px;
+  text-align: justify;
+  font-size: 16px;
   color: #333;
+  text-align: justify;
+`;
+
+export const NewHelpOrderButton = styled(Button)`
+  margin-top: 20px;
+  align-self: stretch;
 `;

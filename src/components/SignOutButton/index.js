@@ -14,7 +14,7 @@ export default function SignOutButton() {
   };
 
   return (
-    <TouchableOpacity onPress={handleSignOut}>
+    <TouchableOpacity onPress={handleSignOut} style={{ marginLeft: 8 }}>
       <Icon name="logout" size={30} color="#fff" />
     </TouchableOpacity>
   );

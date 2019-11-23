@@ -1,9 +1,9 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import HeaderTitle from '~/components/HeaderTitle';
 import Background from '~/components/Background';
+import GoBackButton from '~/components/GoBackButton';
+
 import {
   Container,
   Top,
@@ -45,13 +45,5 @@ export default function ViewHelpOrder({ navigation }) {
 
 ViewHelpOrder.navigationOptions = ({ navigation }) => ({
   headerTitle: () => <HeaderTitle />,
-  headerLeft: () => (
-    <TouchableOpacity
-      onPress={() => {
-        navigation.goBack();
-      }}
-    >
-      <Icon name="chevron-left" size={30} color="#fff" />
-    </TouchableOpacity>
-  ),
+  headerLeft: () => <GoBackButton navigation={navigation} />,
 });

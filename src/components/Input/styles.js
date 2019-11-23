@@ -15,6 +15,6 @@ export const TInput = styled.TextInput.attrs({
 })`
   flex: 1;
   font-size: 15px;
-  margin-left: 10px;
+  margin-left: ${props => (props.icon ? '10px' : '0')};
   color: #fff;
 `;

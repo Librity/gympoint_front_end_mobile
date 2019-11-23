@@ -6,9 +6,10 @@ import api from '~/services/api';
 
 import HeaderTitle from '~/components/HeaderTitle';
 import Background from '~/components/Background';
-import { Container, NewHelpOrderButton, List } from './styles';
 import HelpOrder from '~/components/HelpOrder';
 import SignOutButton from '~/components/SignOutButton';
+
+import { Container, NewHelpOrderButton, List } from './styles';
 
 function ListHelpOrders({ navigation, isFocused }) {
   const studentId = useSelector(state => state.student.studentId);
@@ -24,9 +25,15 @@ function ListHelpOrders({ navigation, isFocused }) {
   }, [studentId]);
 
   useEffect(() => {
+    const abortController = new AbortController();
+
     if (isFocused) {
       loadHelpOrders();
     }
+
+    return () => {
+      abortController.abort();
+    };
   }, [isFocused, loadHelpOrders]);
 
   const handleNewCheckin = async () => {
