@@ -1,25 +1,43 @@
-import React, { useEffect, useState } from 'react';
-import { TouchableOpacity, Image } from 'react-native';
+import React from 'react';
+import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
-import api from '~/services/api';
 
 import HeaderTitle from '~/components/HeaderTitle';
 import Background from '~/components/Background';
 import {
   Container,
-  Title,
-  ProviderList,
-  Provider,
-  Avatar,
-  Name,
+  Top,
+  Left,
+  Right,
+  Content,
+  Question,
+  Answer,
 } from './styles';
 
 export default function ViewHelpOrder({ navigation }) {
+  const helpOrder = navigation.getParam('helpOrder');
+  const formattedDate = navigation.getParam('formattedDate');
+
   return (
     <Background>
       <Container>
-        <Title>ViewHelpOrder</Title>
+        <Top>
+          <Left>PERGUNTA</Left>
+
+          <Right>{formattedDate}</Right>
+        </Top>
+
+        <Question>
+          <Content>{helpOrder.question}</Content>
+        </Question>
+
+        <Top>
+          <Left>RESPOSTA</Left>
+        </Top>
+
+        <Answer>
+          <Content>{helpOrder.answer}</Content>
+        </Answer>
       </Container>
     </Background>
   );

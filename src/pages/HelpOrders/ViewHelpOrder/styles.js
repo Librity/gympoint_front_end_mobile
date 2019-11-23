@@ -1,46 +1,57 @@
 import styled from 'styled-components/native';
-import { RectButton } from 'react-native-gesture-handler';
 
 export const Container = styled.SafeAreaView`
-  flex: 1;
-`;
-
-export const Title = styled.Text`
-  font-size: 20px;
-  color: #fff;
-  font-weight: bold;
-  align-self: center;
-  margin-top: 30px;
-`;
-
-export const ProviderList = styled.FlatList.attrs({
-  showsVerticalScrollIndicator: false,
-  numColumns: 2,
-})`
+  margin: 20px;
   margin-top: 60px;
-  padding: 0 20px;
-`;
-
-export const Provider = styled(RectButton)`
-  background: #fff;
-  border-radius: 4px;
   padding: 20px;
+  border-radius: 4px;
+  background: #fff;
+
+  display: flex;
   flex: 1;
-
+  flex-direction: column;
   align-items: center;
-  margin: 0 10px 20px;
+  align-self: stretch;
 `;
 
-export const Avatar = styled.Image`
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
+export const Top = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-self: stretch;
+  justify-content: space-between;
 `;
 
-export const Name = styled.Text`
-  margin-top: 15px;
+export const Left = styled.Text`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const Right = styled.Text`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
   font-size: 14px;
-  font-weight: bold;
-  color: #333;
-  text-align: center;
+  color: #666666;
+  text-align: right;
+`;
+
+export const Question = styled.ScrollView`
+  margin-top: 16px;
+  margin-bottom: 16px;
+`;
+
+export const Content = styled.Text`
+  flex: 1;
+  font-size: 14px;
+  color: #666666;
+  line-height: 26px;
+  text-align: justify;
+  padding-right: 5px;
+`;
+
+export const Answer = styled.ScrollView`
+  margin-bottom: 16px;
 `;

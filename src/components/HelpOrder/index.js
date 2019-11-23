@@ -5,19 +5,22 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import { Container, Top, Left, Answered, Right, Content } from './styles';
 
-export default function HelpOrder({ data }) {
+export default function HelpOrder({ helpOrder, navigation }) {
   const formattedDate = useMemo(() => {
-    return formatRelative(parseISO(data.updatedAt), new Date(), {
+    return formatRelative(parseISO(helpOrder.updatedAt), new Date(), {
       locale: pt,
       addSuffix: true,
     });
-  }, [data.updatedAt]);
+  }, [helpOrder.updatedAt]);
+
+  const handleNavigate = () =>
+    navigation.navigate('ViewHelpOrder', { helpOrder, formattedDate });
 
   return (
-    <Container>
+    <Container onPress={handleNavigate}>
       <Top>
         <Left>
-          {data.answer ? (
+          {helpOrder.answer ? (
             <>
               <Icon name="check-circle" size={20} color="#42cb59" />
               <Answered answered>Respondido</Answered>
@@ -33,7 +36,7 @@ export default function HelpOrder({ data }) {
         <Right>{formattedDate}</Right>
       </Top>
 
-      <Content>{data.question}</Content>
+      <Content>{helpOrder.question}</Content>
     </Container>
   );
 }

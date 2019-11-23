@@ -43,7 +43,9 @@ function ListHelpOrders({ navigation, isFocused }) {
         <List
           data={helpOrders}
           keyExtractor={item => String(item.id)}
-          renderItem={({ item }) => <HelpOrder data={item} />}
+          renderItem={({ item: helpOrder }) => (
+            <HelpOrder helpOrder={helpOrder} navigation={navigation} />
+          )}
         />
       </Container>
     </Background>

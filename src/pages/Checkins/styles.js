@@ -8,7 +8,7 @@ export const Container = styled.SafeAreaView`
 
 export const NewCheckinButton = styled(Button)`
   align-self: stretch;
-  margin-top: 70px;
+  margin-top: 60px;
 `;
 
 export const List = styled.FlatList.attrs({
