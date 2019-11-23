@@ -6,7 +6,6 @@ import api from '~/services/api';
 
 import HeaderTitle from '~/components/HeaderTitle';
 import Background from '~/components/Background';
-import DateInput from '~/components/DateInput';
 
 import { Container, HourList, Hour, Title } from './styles';
 

@@ -1,28 +1,57 @@
-import React, { useMemo } from 'react';
-import { TouchableOpacity, Alert, Image } from 'react-native';
-import { formatRelative, parseISO } from 'date-fns';
-import pt from 'date-fns/locale/pt';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useSelector } from 'react-redux';
+import { withNavigationFocus } from 'react-navigation';
+import { Alert } from 'react-native';
 
-import logo from '~/assets/logoWhiteHorizontal.png';
 import api from '~/services/api';
 
 import HeaderTitle from '~/components/HeaderTitle';
 import Background from '~/components/Background';
-import { Container, Title, Avatar, Name, Time, SubmitButton } from './styles';
+import { Container, NewHelpOrderButton, List } from './styles';
+import HelpOrder from '~/components/HelpOrder';
 import SignOutButton from '~/components/SignOutButton';
 
-export default function ListHelpOrders({ navigation }) {
+function ListHelpOrders({ navigation, isFocused }) {
+  const studentId = useSelector(state => state.student.studentId);
+
+  const [helpOrders, setHelpOrders] = useState([]);
+
+  const loadHelpOrders = useCallback(async () => {
+    const response = await api.get(`/students/${studentId}/help_orders`);
+
+    setHelpOrders(response.data);
+  }, [studentId]);
+
+  useEffect(() => {
+    if (isFocused) {
+      loadHelpOrders();
+    }
+  }, [isFocused, loadHelpOrders]);
+
+  const handleNewCheckin = async () => {
+    navigation.navigate('NewHelpOrder');
+  };
+
   return (
     <Background>
       <Container>
-        <Title>ListHelpOrders</Title>
+        <NewHelpOrderButton onPress={handleNewCheckin}>
+          Novo pedido de auxílio
+        </NewHelpOrderButton>
+
+        <List
+          data={helpOrders}
+          keyExtractor={item => String(item.id)}
+          renderItem={({ item }) => <HelpOrder data={item} />}
+        />
       </Container>
     </Background>
   );
 }
 
-ListHelpOrders.navigationOptions = ({ navigation }) => ({
+ListHelpOrders.navigationOptions = {
   headerTitle: () => <HeaderTitle />,
   headerLeft: () => <SignOutButton />,
-});
+};
+
+export default withNavigationFocus(ListHelpOrders);

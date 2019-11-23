@@ -18,7 +18,6 @@ function Checkins({ isFocused }) {
 
   const loadCheckins = useCallback(async () => {
     const response = await api.get(`/students/${studentId}/checkins`);
-    console.tron.log(response.data);
 
     setCheckins(response.data);
   }, [studentId]);
@@ -35,9 +34,8 @@ function Checkins({ isFocused }) {
 
       loadCheckins();
     } catch (err) {
-      console.tron.log(err);
       Alert.alert(
-        'Limite de check-ins exedido!',
+        'Limite de check-ins excedido!',
         'Alunos só podem fazer 5 check-ins a cada 7 dias.'
       );
     }
