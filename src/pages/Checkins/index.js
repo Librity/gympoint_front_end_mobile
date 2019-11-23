@@ -25,9 +25,15 @@ function Checkins({ isFocused }) {
   }, [studentId]);
 
   useEffect(() => {
+    const abortController = new AbortController();
+
     if (isFocused) {
       loadCheckins();
     }
+
+    return () => {
+      abortController.abort();
+    };
   }, [isFocused, loadCheckins]);
 
   const handleNewCheckin = async () => {
