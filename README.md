@@ -40,6 +40,7 @@ A versão mobile do projeto Gympoint representa a visão do aluno, ou seja, toda
 ### Opcionais
 
 - [ ] Adicione scroll infinito com paginação na listagem de check-ins e pedidos de auxílio;
+- [ ] Cover every nook&cranny with test suites;
 
 ## 🎨 Layout
 
